@@ -36,7 +36,7 @@ Feature:  You are working in the backend team that exposes the service:
       | 950        | true        | 2022-02-10 | 2022-03-30 | Dinner          |
 #      | 800        | false       | 2022-02-03 | 2022-02-05 | Breakfast       |
 
-  @RestA
+#  @RestA
   Scenario Outline: Test that existing booked users can be retrieved with a GET request requiring authorization code or token
     Given service is up and running
     When i search with the id of a booked user with a GET method

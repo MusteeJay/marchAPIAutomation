@@ -62,16 +62,7 @@ public class RestfulBookerStepDefs extends BaseSteps{
         assertThat(responseForPostService.body().jsonPath().get("booking.depositpaid"), is(Boolean.valueOf(true)));
         assertThat(responseForPostService.body().jsonPath().get("booking.bookingdates.checkin"), is(equalTo(cheIn)));
     }
-    @Then("i should get the new user details with {string}, {string}, {string},{string} and {string} returned with status code of {int}")
-//    public void iShouldGetTheNewUserDetailsWithAndReturnedWithStatusCodeOf(String fName, String lName, String totPrice,
-//                                                                           String depPaid, String cheIn, int stCode) {
-//        assertThat(responseForPostService.statusCode(), is(stCode));
-//        assertThat(responseForPostService.body().jsonPath().get("booking.firstname"), is(equalTo(fName)));
-//        assertThat(responseForPostService.body().jsonPath().get("booking.lastname"), is(equalTo(lName)));
-//        assertThat(responseForPostService.body().jsonPath().get("booking.totalprice"), is(equalTo(Integer.valueOf(totPrice))));
-//        assertThat(responseForPostService.body().jsonPath().get("booking.depositpaid"), is(true));
-//        assertThat(responseForPostService.body().jsonPath().get("booking.bookingdates.checkin"), is(equalTo(cheIn)));
-//    }
+
     @And("I should be able to assess the generated {string} of the new booked user.")
     public void iShouldBeAbleToAssessTheGeneratedOfTheNewBookedUser(String ID) {
         restfulRequestBodyService = new RestfulRequestBodyService();

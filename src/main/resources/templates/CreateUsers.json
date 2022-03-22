@@ -1,0 +1,22 @@
+{
+  "name": "Peace Mustapha",
+  "username": "Pmustee",
+  "email": "Pmustee@yesenia.net",
+  "address": {
+    "street": "Ozil Extension",
+    "suite": "Suite 847",
+    "city": "BobGaley",
+    "zipcode": "59590-4157",
+    "geo": {
+      "lat": "-68.6102",
+      "lng": "-47.0653"
+    }
+  },
+  "phone": "1-463-123-4447",
+  "website": " ",
+  "company": {
+    "name": "Romaguera-Jacobson",
+    "catchPhrase": "Face to face bifurcated interface",
+    "bs": "e-enable strategic applications"
+  }
+}

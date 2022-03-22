@@ -1,0 +1,11 @@
+{
+  "firstname": "Mary",
+  "lastname": "Ericsson",
+  "totalprice": 950,
+  "depositpaid": true,
+  "bookingdates": {
+    "checkin": "2022-02-28",
+    "checkout": "2022-03-25"
+  },
+  "additionalneeds": "Dinner"
+}

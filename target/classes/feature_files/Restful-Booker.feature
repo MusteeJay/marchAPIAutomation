@@ -16,6 +16,16 @@ Feature:  You are working in the backend team that exposes the service:
       | 35        | Mustee    | Jay      | 800        | false       | 2022-02-03 | 2022-02-05 |
 #      | 10        | Mary      | Ericsson | 950        | true        | 2022-02-28 | 2022-03-25 |
 
+  @RestTok
+  Scenario Outline: Test that new user can be booked with a POST request
+    Given  Restful-booker service is up and running
+    When I book a new user with the following details "<username>" and "<password>",
+    Then i should get the new "token" generated returned with status code of 200
+    Examples:
+      | username | password    |
+      | admin    | password123 |
+
+
   @RestA
   Scenario Outline: Test that a booked user  be partially updated with a PATCH request requiring authorization code or token
     Given  Restful-booker service is up and running
@@ -26,12 +36,12 @@ Feature:  You are working in the backend team that exposes the service:
       | 950        | true        | 2022-02-10 | 2022-03-30 | Dinner          |
 #      | 800        | false       | 2022-02-03 | 2022-02-05 | Breakfast       |
 
-  @RestA
+#  @RestA
   Scenario Outline: Test that existing booked users can be retrieved with a GET request requiring authorization code or token
     Given service is up and running
     When i search with the id of a booked user with a GET method
     Then i should get the correct "<firstname>", "<lastname>", "<totalprice>", "<depositpaid>" and "<checkin>" returned with status code of 200
     Examples:
       | firstname | lastname | totalprice | depositpaid | checkin    |
-      | Mustee    | Jay      | 800        | false        | 2022-02-03 |
+      | Mustee    | Jay      | 800        | false       | 2022-02-03 |
 

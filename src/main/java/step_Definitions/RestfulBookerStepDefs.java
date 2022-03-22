@@ -132,4 +132,7 @@ public class RestfulBookerStepDefs extends BaseSteps{
         assertThat(responseForGetMethod.body().jsonPath().get("bookingdates.checkin"), is(equalTo(chIn)));
     }
 
+    @Then("i should get the new {string} generated returned with status code of {int}")
+    public void iShouldGetTheNewGeneratedReturnedWithStatusCodeOf(String arg0, int arg1) {
+    }
 }

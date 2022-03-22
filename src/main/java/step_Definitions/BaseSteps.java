@@ -16,8 +16,9 @@ public class BaseSteps {
     public String restfulServiceUrl;
     //    postman request body is called payload
     public String MakeAPostPayload, MakeACommentPayload, UpdateAPostPayload, CreateUserAccountPayload,
-            RestfulBookNewUserPayload, RestfulGetUserIDPayload, RestfulBookerUpdatePayload;
-    public String makeAPostEndpoint, makeACommentEndpoint, createAUserEndpoint, restfulMakeAPostEndpoint, restfulGetEndpoint;
+            RestfulBookNewUserPayload, RestfulGetUserIDPayload, RestfulBookerUpdatePayload, RestfulBookerCreateTokenPayload;
+    public String makeAPostEndpoint, makeACommentEndpoint, createAUserEndpoint, restfulMakeAPostEndpoint,
+            restfulGetEndpoint, restfulCreatTokenEndpoint;
     public Headers headers;
     private String endpointPath;
     private Response response;
@@ -31,11 +32,13 @@ public class BaseSteps {
         CreateUserAccountPayload = "/templates/CreateUsers.json";
         RestfulBookNewUserPayload = "/templates/restfulMakeAPost.json";
         RestfulGetUserIDPayload = "/templates/restfulGetUserID.json";
+        RestfulBookerCreateTokenPayload = "/templates/RestfulCreateAToken.json";
         RestfulBookerUpdatePayload = "/templates/restfulUpdateAnAccount.json";
         serviceUrl = "https://jsonplaceholder.typicode.com/";
         restfulServiceUrl = "https://restful-booker.herokuapp.com/";
         restfulMakeAPostEndpoint = restfulServiceUrl + "booking/";
         restfulGetEndpoint = restfulServiceUrl + "ping/";
+        restfulCreatTokenEndpoint = restfulServiceUrl + "auth/";
         makeACommentEndpoint = serviceUrl + "comments/";
         makeAPostEndpoint = serviceUrl + "posts/";
 //        createAUserEndpoint = serviceUrl + "users/";

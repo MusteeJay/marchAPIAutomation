@@ -24,5 +24,9 @@ public class RestfulRequestBodyService{
     public void SetRestfulResponseBodyGetUserID(DocumentContext responseBodyForCreate, String bookingID){
         responseBodyForCreate.set("bookingid", bookingID);
     }
+    public void setRestfulRequestBodyCreateToken(DocumentContext requestBody, String username, String password){
+        requestBody.set("username", username);
+        requestBody.set("password", password);
+    }
 
 }

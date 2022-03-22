@@ -16,14 +16,14 @@ Feature:  You are working in the backend team that exposes the service:
       | 35        | Mustee    | Jay      | 800        | false       | 2022-02-03 | 2022-02-05 |
 #      | 10        | Mary      | Ericsson | 950        | true        | 2022-02-28 | 2022-03-25 |
 
+  @RestTok
   Scenario Outline: Test that new user can be booked with a POST request
     Given  Restful-booker service is up and running
-    When I book a new user with the following details "<firstname>","<lastname>", "<totalprice>", "<depositpaid>", "<checkin>" and "<checkout>",
+    When I book a new user with the following details "<username>" and "<password>",
     Then i should get the new "token" generated returned with status code of 200
     Examples:
-      | bookingid | firstname | lastname | totalprice | depositpaid | checkin    | checkout   |
-      | 35        | Mustee    | Jay      | 800        | false       | 2022-02-03 | 2022-02-05 |
-#      | 10        | Mary      | Ericsson | 950        | true        | 2022-02-28 | 2022-03-25 |
+      | username | password    |
+      | admin    | password123 |
 
 
   @RestA
@@ -43,5 +43,5 @@ Feature:  You are working in the backend team that exposes the service:
     Then i should get the correct "<firstname>", "<lastname>", "<totalprice>", "<depositpaid>" and "<checkin>" returned with status code of 200
     Examples:
       | firstname | lastname | totalprice | depositpaid | checkin    |
-      | Mustee    | Jay      | 800        | false        | 2022-02-03 |
+      | Mustee    | Jay      | 800        | false       | 2022-02-03 |
 

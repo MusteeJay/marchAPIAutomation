@@ -16,8 +16,10 @@ import static org.hamcrest.CoreMatchers.*;
 
 public class RestfulBookerStepDefs extends BaseSteps {
     RestfulRequestBodyService restfulRequestBodyService;
-    Response responseForGetService, responseForPostService, responseForPatchService, responseForGetMethod, responseForCreateToken;
-    String generatedId, bookingid, generatedToken;
+    Response responseForGetService, responseForPostService, responseForPatchService, responseForGetMethod,
+            responseForCreateToken, responseForUpdateService;
+    String bookingid, generatedToken;
+    int generatedId;
 
 
     @Given("Restful-booker service is up and running")
@@ -30,20 +32,19 @@ public class RestfulBookerStepDefs extends BaseSteps {
 
 
     }
-
-    @When("I book a new user with the following details {string},{string}, {string}, {string}, {string} and {string},")
-    public void i_book_a_new_user_with_the_following_details_and(String firstname, String lastname, String totalrice,
-                                                                 String depositpaid, String checkin, String checkout) {
+    @When("I book a new user with the following details {string},{string}, {string}, {string}, {string}, {string} and {string},")
+    public void iBookANewUserWithTheFollowingDetailsAnd(String firstname, String lastname, String totalrice,
+                                                        String depositpaid, String checkin, String checkout, String additionalneeds) {
         setHeadersWithContentType();
         setEndpointPath(restfulMakeAPostEndpoint);
         restfulRequestBodyService = new RestfulRequestBodyService();
         DocumentContext requestBody = loadJsonTemplate(RestfulBookNewUserPayload);
         restfulRequestBodyService.SetRestfulRequestBodyForPost(requestBody, firstname, lastname, totalrice, depositpaid,
-                checkin, checkout);
+                checkin, checkout, additionalneeds);
         getPostcall();
         responseForPostService = getResponse();
-
     }
+
 
     @Then("i should get the new user details with {string}, {string}, {string}, {string},{string} and {string} returned with status code of {int}")
     public void iShouldGetTheNewUserDetailsWithAndReturnedWithStatusCodeOf(String bookId, String fName,
@@ -70,9 +71,10 @@ public class RestfulBookerStepDefs extends BaseSteps {
         DocumentContext responseBodyForUser = loadJsonTemplate(RestfulGetUserIDPayload);
         restfulRequestBodyService.SetRestfulResponseBodyGetUserID(responseBodyForUser, bookingid);
         responseForPostService = getResponse();
-        responseForPostService.body().jsonPath().getInt("bookingid");
-//        generatedId = responseForPostService.body().jsonPath().getInt("bookingid");
+//        responseForPostService.body().jsonPath().getInt("bookingid");
+        generatedId = responseForPostService.body().jsonPath().getInt("bookingid");
         System.out.println("the new user ID is:" + " " + responseForPostService.body().jsonPath().getInt("bookingid"));
+        System.out.println(generatedId);
 
     }
 
@@ -102,7 +104,8 @@ public class RestfulBookerStepDefs extends BaseSteps {
     public void iPartiallyUpdateABookedUserAccountWithTheFollowingDetailsAnd(String totalPrice, String depositpaid,
                                                                              String checkin, String checkout, String additionalneeds) {
         setHeadersWithManyHeaders();
-        int ID = 20;
+        int ID = 10;
+//        generatedId = responseForPostService.body().jsonPath().getInt("bookingid");
         setEndpointPath(restfulMakeAPostEndpoint + ID);
         restfulRequestBodyService = new RestfulRequestBodyService();
         DocumentContext responseBody = loadJsonTemplate(RestfulBookerUpdatePayload);
@@ -127,7 +130,7 @@ public class RestfulBookerStepDefs extends BaseSteps {
     @When("i search with the id of a booked user with a GET method")
     public void iSearchWithTheIdOfABookedUserWithAGETMethod() {
         setHeadersWithManyHeaders();
-        int bookingId = 31;
+        int bookingId = 22;
         setEndpointPath(restfulMakeAPostEndpoint + bookingId);
         getcall();
         responseForGetMethod = getResponse();
@@ -144,4 +147,42 @@ public class RestfulBookerStepDefs extends BaseSteps {
         assertThat(responseForGetMethod.body().jsonPath().get("bookingdates.checkin"), is(equalTo(chIn)));
     }
 
+    //        HTTP PUT Method Section
+
+    @When("i search with the {string} of a booked user with a GET method")
+    public void iSearchWithTheOfABookedUserWithAGETMethod(String bookingid) {
+        setHeadersWithManyHeaders();
+        generatedId = responseForPostService.body().jsonPath().getInt("bookingid");
+        System.out.println(generatedId);
+        setEndpointPath(restfulMakeAPostEndpoint + generatedId);
+        getcall();
+        responseForGetMethod = getResponse();
+    }
+    @Then("i should get the new user details with {string}, {string}, {string},{string}, {string}, {string} and {string} returned with status code of {int}")
+    public void iShouldGetTheNewUserDetailsWithAndReturnedWithStatusCodeOf(String fNam, String lNam, String totPr, String depPd, String chIn, String chOut, String addNeed, int stCode) {
+        assertThat(responseForUpdateService.statusCode(), is(stCode));
+        assertThat(responseForUpdateService.body().jsonPath().get("firstname"), is(equalTo(fNam)));
+        assertThat(responseForUpdateService.body().jsonPath().get("lastname"), is(equalTo(lNam)));
+        assertThat(responseForUpdateService.body().jsonPath().get("totalprice"), is(equalTo(Integer.valueOf(totPr))));
+        assertThat(responseForUpdateService.body().jsonPath().get("depositpaid"), is(equalTo(Boolean.valueOf(depPd))));
+        assertThat(responseForUpdateService.body().jsonPath().get("bookingdates.checkin"), is(equalTo(chIn)));
+        assertThat(responseForUpdateService.body().jsonPath().get("bookingdates.checkout"), is(equalTo(chOut)));
+        assertThat(responseForUpdateService.body().jsonPath().get("additionalneeds"), is(equalTo(addNeed)));
+    }
+
+
+    @When("I update a booked user account with the user generated {string} and the following details {string}, {string}, {string}, {string}, {string}, {string} and {string}")
+    public void iUpdateABookedUserAccountWithTheUserGeneratedAndTheFollowingDetailsAnd(String bookingid, String firstname, String lastname, String totalprice, String depositpaid,
+                                                                                       String checkin, String checkout, String additionalneeds) {
+        setHeadersWithManyHeaders();
+        generatedId = responseForPostService.body().jsonPath().getInt("bookingid");
+        System.out.println(generatedId);
+        setEndpointPath(restfulMakeAPostEndpoint + generatedId);
+        restfulRequestBodyService = new RestfulRequestBodyService();
+        DocumentContext responseBody = loadJsonTemplate(RestfulUpdateAUserPayload);
+        restfulRequestBodyService.SetRestfulRequestBodyForPut(responseBody, firstname, lastname, totalprice, depositpaid,
+                checkin, checkout, additionalneeds);
+        getUpdatePostcall();
+        responseForUpdateService = getResponse();
+    }
 }

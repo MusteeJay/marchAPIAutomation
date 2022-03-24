@@ -2,10 +2,10 @@
   "firstname": "Mustee",
   "lastname": "Jay",
   "totalprice": 800,
-  "depositpaid": false,
+  "depositpaid": true,
   "bookingdates": {
-    "checkin": "2022-02-03",
-    "checkout": "2022-02-05"
+    "checkin": "2022-03-03",
+    "checkout": "2022-04-05"
   },
   "additionalneeds": "Breakfast"
 }

@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
         monochrome = true,
 //  if the step definition class or package is in a location separate from the testRunner class, we need glue to get it
         glue = {"step_Definitions"},
-        tags = "@RestTok"
+        tags = "@RestMA"
 )
 public class TestRunner {
 }

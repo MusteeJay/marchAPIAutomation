@@ -16,7 +16,8 @@ public class BaseSteps {
     public String restfulServiceUrl;
     //    postman request body is called payload
     public String MakeAPostPayload, MakeACommentPayload, UpdateAPostPayload, CreateUserAccountPayload,
-            RestfulBookNewUserPayload, RestfulGetUserIDPayload, RestfulBookerUpdatePayload, RestfulBookerCreateTokenPayload;
+            RestfulBookNewUserPayload, RestfulGetUserIDPayload, RestfulBookerUpdatePayload,
+            RestfulBookerCreateTokenPayload, RestfulUpdateAUserPayload;
     public String makeAPostEndpoint, makeACommentEndpoint, createAUserEndpoint, restfulMakeAPostEndpoint,
             restfulGetEndpoint, restfulCreatTokenEndpoint;
     public Headers headers;
@@ -26,14 +27,15 @@ public class BaseSteps {
 
 
     public BaseSteps() {
-        MakeACommentPayload = "/templates/CommentOnPost.json";
-        MakeAPostPayload = "/templates/MakeAPost.json";
-        UpdateAPostPayload = "/templates/UpdateAPost.json";
-        CreateUserAccountPayload = "/templates/CreateUsers.json";
-        RestfulBookNewUserPayload = "/templates/restfulMakeAPost.json";
-        RestfulGetUserIDPayload = "/templates/restfulGetUserID.json";
-        RestfulBookerCreateTokenPayload = "/templates/RestfulCreateAToken.json";
-        RestfulBookerUpdatePayload = "/templates/restfulUpdateAnAccount.json";
+        MakeACommentPayload = "/templates/JsonPlaceholder/CommentOnPost.json";
+        MakeAPostPayload = "/templates/JsonPlaceholder/MakeAPost.json";
+        UpdateAPostPayload = "/templates/JsonPlaceholder/UpdateAPost.json";
+        CreateUserAccountPayload = "/templates/JsonPlaceholder/CreateUsers.json";
+        RestfulBookNewUserPayload = "/templates/Restful-Booker/restfulMakeAPost.json";
+        RestfulGetUserIDPayload = "/templates/Restful-Booker/restfulGetUserID.json";
+        RestfulBookerCreateTokenPayload = "/templates/Restful-Booker/RestfulCreateAToken.json";
+        RestfulBookerUpdatePayload = "/templates/Restful-Booker/restfulUpdateAnAccount.json";
+        RestfulUpdateAUserPayload = "/templates/Restful-Booker/restUpdateByPut.json";
         serviceUrl = "https://jsonplaceholder.typicode.com/";
         restfulServiceUrl = "https://restful-booker.herokuapp.com/";
         restfulMakeAPostEndpoint = restfulServiceUrl + "booking/";
@@ -69,7 +71,7 @@ public class BaseSteps {
         headers = new Headers(
                 new Header("Content-Type", "application/json"),
                 new Header("accept", "application/json"),
-                new Header("Token", "3368d700b8834af"));
+                new Header("Token", "da252cab351c733"));
         setHeaders(headers);
     }
 

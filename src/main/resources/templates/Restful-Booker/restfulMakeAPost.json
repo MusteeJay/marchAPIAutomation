@@ -6,5 +6,6 @@
   "bookingdates": {
     "checkin": "2022-02-03",
     "checkout": "2022-02-05"
-  }
+  },
+  "additionalneeds": "Breakfast"
 }
